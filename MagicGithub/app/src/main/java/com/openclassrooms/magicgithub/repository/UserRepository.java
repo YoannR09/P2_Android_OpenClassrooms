@@ -14,20 +14,33 @@ public class UserRepository {
         this.apiService = apiService;
     }
 
+    /**
+     * Get users list from apiService
+     * @return
+     */
     public List<User> getUsers() {
         return apiService.getUsers();
     }
 
+    /**
+     * Generate random user on users list on apiService
+     */
     public void generateRandomUser() {
         apiService.generateRandomUser();
     }
 
+    /**
+     * Délete user from users list get on apiService
+     * @param user
+     */
     public void deleteUser(User user) {
-        List<User> users = new ArrayList<>();
+        List<User> users = getUsers();
+        User userToRemoove = null;
         for (User u: users){
             if (u.getId() == user.getId()) {
-                apiService.deleteUser(user);
+                userToRemoove = user;
             }
         }
+        apiService.deleteUser(userToRemoove);
     }
 }
